@@ -1,0 +1,61 @@
+version: "3"
+services:
+  front:
+    image: node:14
+    ports:
+      - 3000:3000
+    volumes:
+      - ./front:/opt/app:z
+    command: |
+      /bin/bash -c "
+        cd /opt/app
+        npm install
+        npm start
+      "
+  back:
+    image: node:14
+    environment:
+      - PORT=3003
+      - MONGO_USER=root
+      - MONGO_PASSWORD=shorties
+      - MONGO_SERVER=mongo
+    depends_on: 
+      - mongo
+    ports:
+      - 8888:3003
+    volumes:
+      - ./back:/opt/app:z
+    command: |
+      /bin/bash -c "
+        cd /opt/app
+        npm install
+        npx nodemon ./bin/www
+      "
+  redirector:
+    build: ./redirector
+    environment:
+      - MONGO_USER=root
+      - MONGO_PASSWORD=shorties
+      - MONGO_SERVER=mongo
+    ports: 
+      - 8080:80
+    volumes:
+      - ./redirector:/var/www/html:z
+    depends_on: 
+      - mongo
+  mongo:
+    image: mongo:4.4
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: shorties
+  mongo-express:
+    image: mongo-express:0.54
+    restart: always
+    depends_on: 
+      - mongo
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: shorties
