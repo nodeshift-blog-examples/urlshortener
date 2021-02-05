@@ -1,0 +1,6 @@
+RewriteEngine on
+Header add Access-Control-Allow-Origin "*"
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /index.php [L,QSA]
