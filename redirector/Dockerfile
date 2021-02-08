@@ -5,7 +5,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Install Mongo drivers
 RUN apt update
-RUN apt install -y libcurl4-openssl-dev pkg-config libssl-dev
+RUN apt install -y libcurl4-openssl-dev pkg-config libssl-dev git
 RUN pecl install mongodb
 RUN echo 'extension=mongodb.so' > /usr/local/etc/php/php.ini
 
@@ -15,7 +15,9 @@ RUN pecl config-set php_ini /usr/local/etc/php/php.ini
 RUN a2enmod rewrite && a2enmod headers
 
 # Composer install
-CMD "cd /var/www/html && composer install"
+WORKDIR /var/www/html
+# CMD "cd /var/www/html && composer install"
 
 # Start server
-ENTRYPOINT [ "apache2-foreground" ]
+# ENTRYPOINT [ "apache2-foreground" ]
+CMD composer install && apachectl -D FOREGROUND
