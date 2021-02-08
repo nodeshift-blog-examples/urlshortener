@@ -6,12 +6,13 @@ services:
       - 3000:3000
     volumes:
       - ./front:/opt/app:z
-    command: |
-      /bin/bash -c '
-        cd /opt/app;
-        npm install;
-        npm start;
-      '
+    command: 
+      - /bin/bash
+      - -c
+      - |
+        cd /opt/app
+        npm install
+        npm start
   back:
     image: node:14
     environment:
@@ -25,12 +26,13 @@ services:
       - 8888:3003
     volumes:
       - ./back:/opt/app:z
-    command: |
-      /bin/bash -c '
-        cd /opt/app;
-        npm install;
-        npx nodemon ./bin/www;
-      '
+    command: 
+      - /bin/bash
+      - -c
+      - |
+        cd /opt/app
+        npm install
+        npx nodemon ./bin/www
   redirector:
     build: ./redirector
     environment:
