@@ -3,6 +3,8 @@
 # dependencies
 node_modules
 /redirector/vendor
+/front/package-lock.json
+/front/yarn.lock
 /.pnp
 .pnp.js
 
