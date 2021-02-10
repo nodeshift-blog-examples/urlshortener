@@ -26,7 +26,7 @@ services:
       - 8888:3003
     volumes:
       - ./back:/opt/app:z
-    command:
+    command: 
       - /bin/bash
       - -c
       - |
