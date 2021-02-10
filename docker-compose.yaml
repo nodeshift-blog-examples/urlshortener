@@ -6,7 +6,7 @@ services:
       - 3000:3000
     volumes:
       - ./front:/opt/app:z
-    command: 
+    command:
       - /bin/bash
       - -c
       - |
