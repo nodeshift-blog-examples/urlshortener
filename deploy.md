@@ -50,6 +50,7 @@ oc set env deployment/urlshortener PORT=8080
 oc set env deployment/urlshortener MONGO_USER=root
 oc set env deployment/urlshortener MONGO_PASSWORD=shorties
 oc set env deployment/urlshortener MONGO_SERVER=mongo
+oc set env deployment/urlshortener MONGO_VERSION=3.6
 
 ➜ oc set env deployment/urlshortener-front BASE_URL=http://$(oc get route urlshortener | awk 'NR>1 {print $2}')
 oc set env deployment/urlshortener-front REDIRECTOR_URL=http://localhost:8888
