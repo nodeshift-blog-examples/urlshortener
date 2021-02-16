@@ -33,8 +33,7 @@ oc expose svc/urlshortener-front --port=8080
 ## Back-end
 
 ```
-oc new-app quay.io/centos7/nodejs-12-centos7~https://github.com/joellord/urlshortener.git --context-dir=back
-oc set env deployment/urlshortener PORT=8080
+oc new-app quay.io/centos7/nodejs-12-centos7~https://github.com/joellord/urlshortener#deploy --context-dir=back
 oc expose svc/urlshortener
 ```
 
@@ -42,15 +41,18 @@ oc expose svc/urlshortener
 
 From the UI, deploy a Mongo DB (ephemeral) with the following configuration
 
+Database Service Name: mongo
+MongoDB Connection Username: shorties
+MongoDB Connection Password: shorties
+MongoDB Database Name: shorties
+MongoDB Database Name: urls
+MongoDB Admin Password: shorties
+Version: 3.6
 
 Configure all the services:
 
 ```
-oc set env deployment/urlshortener PORT=8080
-oc set env deployment/urlshortener MONGO_USER=root
-oc set env deployment/urlshortener MONGO_PASSWORD=shorties
-oc set env deployment/urlshortener MONGO_SERVER=mongo
-oc set env deployment/urlshortener MONGO_VERSION=3.6
+oc set env deployment/urlshortener PORT=8080 MONGO_USER=shorties MONGO_PASSWORD=shorties MONBGO_SERVER=mongo MONGO_VERSION=3.6
 
 ➜ oc set env deployment/urlshortener-front BASE_URL=http://$(oc get route urlshortener | awk 'NR>1 {print $2}')
 oc set env deployment/urlshortener-front REDIRECTOR_URL=http://localhost:8888
@@ -60,6 +62,13 @@ oc set env deployment/urlshortener-front REDIRECTOR_URL=http://localhost:8888
 
 ## Redirector
 
-???
+Create a new application from Container Image in topology
+
+Change the port on the Route
+
+Set environment variables
+```
+oc set env deployment/urlshortener-redirector MONGO_USER=shorties MONGO_PASSWORD=shorties MONGO_SERVER=mongo MONGO_VERSION=3.6
+```
 
 ## Set environment variables
