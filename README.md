@@ -1,5 +1,5 @@
 # URL Shorties
-This is a demo application with multiple microservices that can be deployed on a cluster such as the [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox).
+This is a demo application with multiple microservices that can be deployed on a cluster such as the [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox). Instructions for deployment can be found in [deploy.md](deploy.md).
 
 ## Usage
 To start the development environment with hot-reloads enabled.
