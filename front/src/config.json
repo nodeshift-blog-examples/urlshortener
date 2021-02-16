@@ -1,4 +1,5 @@
 {
   "BASE_URL": "http://localhost:8888",
-  "REDIRECTOR_URL": "http://localhost:8080"
+  "REDIRECTOR_URL": "http://localhost:8080",
+  "HOSTNAME": "local"
 }
