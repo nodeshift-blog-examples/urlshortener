@@ -14,10 +14,11 @@ RUN pecl config-set php_ini /usr/local/etc/php/php.ini
 # Enable modules
 RUN a2enmod rewrite && a2enmod headers
 
-# Composer install
+# Copy files and server setup
 WORKDIR /var/www/html
-# CMD "cd /var/www/html && composer install"
-
+COPY . .
+RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+USER www-data
+EXPOSE 8080
 # Start server
-# ENTRYPOINT [ "apache2-foreground" ]
 CMD composer install && apachectl -D FOREGROUND

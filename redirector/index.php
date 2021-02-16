@@ -10,15 +10,16 @@ if ($route == "/health") {
 $MONGO_USER = $_ENV["MONGO_USER"];
 $MONGO_PASSWORD = $_ENV["MONGO_PASSWORD"];
 $MONGO_SERVER = $_ENV["MONGO_SERVER"];
+$MONGO_VERSION = $_ENV["MONGO_VERSION"];
 $MONGO_DB = "urls";
 $MONGO_COLLECTION = "routes";
 
-$client = new MongoDB\Client(
-    'mongodb://' . $MONGO_USER . ':' . $MONGO_PASSWORD . '@' . $MONGO_SERVER
-);
+$connstr = 'mongodb://' . $MONGO_USER . ':' . $MONGO_PASSWORD . '@' . $MONGO_SERVER;
+if ($MONGO_VERSION == "3.6") $connstr = 'mongodb://' . $MONGO_USER . ':' . $MONGO_PASSWORD . '@' . $MONGO_SERVER . '/' .$MONGO_DB . '?useUnifiedTopology=true';
+
+$client = new MongoDB\Client($connstr);
 $coll = $client->$MONGO_DB->$MONGO_COLLECTION;
 
-// $coll->insert($document);
 $result = $coll->findOne([ "route" => $route ]);
 
 if ($result != null) {

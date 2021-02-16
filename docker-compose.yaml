@@ -39,8 +39,9 @@ services:
       - MONGO_USER=root
       - MONGO_PASSWORD=shorties
       - MONGO_SERVER=mongo
+      - MONGO_VERSION=4.4
     ports: 
-      - 8080:80
+      - 8080:8080
     volumes:
       - ./redirector:/var/www/html:z
     depends_on: 
