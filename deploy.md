@@ -54,10 +54,7 @@ Configure all the services:
 ```
 oc set env deployment/urlshortener PORT=8080 MONGO_USER=shorties MONGO_PASSWORD=shorties MONBGO_SERVER=mongo MONGO_VERSION=3.6
 
-➜ oc set env deployment/urlshortener-front BASE_URL=http://$(oc get route urlshortener | awk 'NR>1 {print $2}')
-oc set env deployment/urlshortener-front REDIRECTOR_URL=http://localhost:8888
-
-
+oc set env deployment/urlshortener-front BASE_URL=http://$(oc get route urlshortener | awk 'NR>1 {print $2}')
 ```
 
 ## Redirector
@@ -71,4 +68,8 @@ Set environment variables
 oc set env deployment/urlshortener-redirector MONGO_USER=shorties MONGO_PASSWORD=shorties MONGO_SERVER=mongo MONGO_VERSION=3.6
 ```
 
-## Set environment variables
+## Add new env var to front
+
+```
+oc set env deployment/urlshortener-front REDIRECTOR_URL=http://$(oc get route urlshortener-redirector | awk 'NR>1 {print $2}')
+```
