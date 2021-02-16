@@ -50,6 +50,11 @@ export default class About extends React.Component {
           <Title headingLevel="h1">Server Status</Title>
         </PageSection>
         <PageSection>
+          <Alert variant="info" isInline title="Hostname">
+            <React.Fragment>{Config.HOSTNAME}</React.Fragment>
+          </Alert>
+        </PageSection>
+        <PageSection>
           <Alert variant={status.server ? "success" : "danger"} isInline title="Server Status">
           { status.server && 
             <React.Fragment>Up and running</React.Fragment>
