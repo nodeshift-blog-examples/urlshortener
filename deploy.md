@@ -10,7 +10,7 @@ curl https://raw.githubusercontent.com/joellord/frontend-containers/main/react-p
 curl https://raw.githubusercontent.com/joellord/frontend-containers/main/react-project/nginx.conf -o nginx.conf
 echo "node_modules" > .dockerignore
 docker build -t urlshortener-front . --format docker
-docker push urlshortener-front <docker_user>/urlshortener-front
+docker push urlshortener-front joellord/urlshortener-front
 ```
 
 Or directly use my image
