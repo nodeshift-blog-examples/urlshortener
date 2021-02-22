@@ -12,10 +12,12 @@ router.get("/", function(req, res, next) {
   res.send({msg: "Hello"}).status(200);
 });
 
-router.get("/health", (req, res) => {
+router.get("/health", async (req, res) => {
+  let dbStatus = false;
+  await client.connect().then(() => dbStatus = true).catch(() => dbStatus = false);
   res.send({
     server: true,
-    database: !!client
+    database: dbStatus
   }).status(200);
 });
 
