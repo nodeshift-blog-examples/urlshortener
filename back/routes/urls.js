@@ -2,12 +2,9 @@ var express = require('express');
 var router = express.Router();
 const { MongoClient } = require("mongodb");
 
-const { MONGO_USER, MONGO_PASSWORD, MONGO_SERVER } = process.env;
-const MONGO_DB = "urls";
-const MONGO_COLLECTION = "routes";
-
-let uri = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_SERVER}`;
-if (process.env.MONGO_VERSION === "3.6") uri = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_SERVER}/${MONGO_DB}?useUnifiedTopology=true`
+const MONGO_DB = require("../utils/mongoConn").getMongoDB();
+const MONGO_COLLECTION = require("../utils/mongoConn").getMongoCollection();
+const uri = require("../utils/mongoConn").getMongoConnectionString();
 console.log(`Connecting to client with url: ${uri}`);
 
 const client = new MongoClient(uri);
