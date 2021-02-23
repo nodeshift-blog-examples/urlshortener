@@ -36,10 +36,13 @@ export default class About extends React.Component {
           return state;
         })
       })
-      .catch(this.setState(state => {
-        state.status.redirector = false;
-        return state;
-      }));
+      .catch(e => {
+        console.log(e);
+        this.setState(state => {
+          state.status.redirector = false;
+          return state;
+        });
+      });
   }
 
   render() {
