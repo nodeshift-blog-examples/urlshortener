@@ -5,7 +5,7 @@ This is a demo application with multiple microservices that can be deployed on a
 To start the development environment with hot-reloads enabled.
 
 ```
-git clone https://github.com/joellord/urlshortener.git
+git clone https://github.com/nodeshift-blog-examples/urlshortener.git
 cd urlshortener
 docker-compose up
 ```
